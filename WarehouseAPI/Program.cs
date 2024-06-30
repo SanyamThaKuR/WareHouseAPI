@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
-using WarehouseAPI.Service;
-
-namespace WarehouseAPI;
+﻿namespace WarehouseAPI;
 
 public class Program
 {
@@ -13,31 +6,28 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        //===============================================
+        // Add services to the container.
+
         builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        //===============================================
-        //builder.Services.AddDbContext<WareHouseContext>(option =>
-        // option.UseSqlServer(//TODO)
-        //================================================
-        builder.Services.AddScoped<IWareHouseServices, WareHouseServices>(); // Registers IWarehouseService with  dependency injection.
-        var app = builder.Build(); // Builds the app.
+
+        var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage(); // Provides detailed exception pages in development.
-            app.UseSwagger(); // Enables Swagger middleware to serve generated Swagger as JSON endpoint.
-            app.UseSwaggerUI(); // Enables Swagger UI.
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
-        app.UseRouting(); // Enables routing.
-        app.UseAuthorization(); // Enables authorization.
-        app.MapControllers(); // Maps controller endpoints.
-        app.Run(); // Runs the app.
+        app.UseAuthorization();
 
 
+        app.MapControllers();
+
+        app.Run();
     }
 }
 

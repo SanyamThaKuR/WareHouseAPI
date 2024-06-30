@@ -29,6 +29,16 @@ namespace WarehouseAPI.Controllers
             var value = _services.GetAllWareHouses();
             return Ok(value);
         }
+        [HttpPost]
+        public ActionResult<WareHouse> AddWarehouse([FromBody] WareHouse warehouse)
+        {
+            if (warehouse == null)
+            {
+                return BadRequest();
+            }
+            _services.AddWarehouse(warehouse);
+            return CreatedAtAction(nameof(GetWareHouse), new { warehouseNumber = warehouse.WareHouseNumber }, warehouse);
+        }
 
 
 

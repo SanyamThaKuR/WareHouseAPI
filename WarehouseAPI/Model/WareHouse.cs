@@ -13,7 +13,7 @@ namespace WarehouseAPI.Model
 
         [Required(ErrorMessage = "Name is required.")]
 
-       public string name { get; set; }
+       public string Name { get; set; }
 
         [Required(ErrorMessage = "Number is required.")]
         public int WareHouseNumber { get; set; }
