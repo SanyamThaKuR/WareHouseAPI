@@ -36,14 +36,15 @@ namespace WarehouseAPI.Service
             return _context.Warehouses.ToList();
         }
 
-        public WareHouse GetWarehouseByNumber(int warehouseNumber)
+        public WareHouse GetWarehouseByNumber(int id)
         {
-            throw new NotImplementedException();
+            return _context.Warehouses.Where(b => b.ID == id).FirstOrDefault();
         }
 
         public void UpdateWarehouse(WareHouse warehouse)
         {
-            throw new NotImplementedException();
+            _context.Warehouses.Update(warehouse); //Update the dbset
+            _context.SaveChanges();
         }
     }
 }
